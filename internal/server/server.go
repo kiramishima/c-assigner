@@ -52,10 +52,12 @@ func (s *Server) Run() error {
 		if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			s.logger.Fatalf("Error starting Server: ", err)
 		}
+
+		_ = waitForShutdown(s.logger, server)
 	}()
 	return nil
 	// graceful shutdown
-	// return waitForShutdown(s.logger, server)
+
 }
 
 // waitForShutdown graceful shutdown
