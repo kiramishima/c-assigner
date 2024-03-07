@@ -1,0 +1,1 @@
+docker build --tag api_credits:v1 -f ./deploy/Dockerfile .
