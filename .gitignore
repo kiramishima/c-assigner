@@ -89,3 +89,7 @@ fabric.properties
 
 app.yaml
 app.yaml
+bin/api-credit
+
+.gcloudignore
+cloud-sql-proxy

@@ -18,6 +18,31 @@
 - Por default el puerto es `8080`.
 - Para cambiar el puesto, proporcione la variable de entorno `PORT`.
 
+````shell
+# Crear una red
+docker network create pg-network
+
+# Levantar la DB
+docker run -d \
+    -e POSTGRES_USER="root" \
+    -e POSTGRES_PASSWORD="root" \
+    -e POSTGRES_DB="credits" \
+    -p 5432:5432 \
+    --network=pg-network \
+    --name pg-database \
+    postgres:latest
+    
+# Ejecutar la migracion
+task db_up
+
+# Ejecutar el servicio
+docker run -it \
+    --network=pg-network \
+    -p 3000:3000 \
+    --env-file .env \
+    api_credits:v1 
+````
+
 ## **Deploy con Docker Compose**
 Para desplegar el api, genere el archivo `docker-compose.yml` y dentro pegue lo siguiente:
 
